@@ -3,6 +3,10 @@
     <head>
         <title>Ceramic Puzzle</title>
         <style>
+            * {
+                touch-action: none;
+            }
+
             #Screen {
                 border: 2px solid black;
                 position: absolute;
@@ -12,6 +16,11 @@
                 bottom: 0;
                 margin: auto;
                 height: 95%;
+            }
+
+            @font-face {
+                font-family: 'neodgm';
+                src: url('Font/neodgm.ttf');
             }
         </style>
     </head>
@@ -32,7 +41,7 @@
         <script src="Script/SceneTitle.js"></script>
         <script src="Script/SceneSelect.js"></script>
         <script src="Script/SceneMap.js"></script>
-        <script src="Script/SceneGame.js"></script>
+        <script src="Script/SceneBattle.js"></script>
 
         <script src="Script/Main.js"></script>
     </body>
