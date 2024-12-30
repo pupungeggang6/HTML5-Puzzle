@@ -17,6 +17,14 @@ const UI = {
 
     battle: {
         buttonMenu: [1160, 40, 80, 80],
+        boardCenter: [640, 400],
+
+        left: {
+            
+        },
+
+        right: {
+        },
     },
 
     menu: {
@@ -26,5 +34,7 @@ const UI = {
         textResume: [324, 384],
         buttonExit: [320, 440, 640, 80],
         textExit: [324, 464],
-    }
+    },
+
+    blockSize: [64, 64]
 }

@@ -7,6 +7,8 @@ function displayBattle() {
 
     context.strokeRect(UI.battle.buttonMenu[0], UI.battle.buttonMenu[1], UI.battle.buttonMenu[2], UI.battle.buttonMenu[3])
 
+    board.render()
+
     if (menu === true) {
         renderMenu()
     }
