@@ -16,4 +16,28 @@ function displaySelect() {
 }
 
 function mouseUpSelect(pos, button) {
+    if (button === 0) {
+        if (menu === false) {
+            if (pointInsideRect(pos, UI.select.buttonBack)) {
+                scene = 'Title'
+                state = ''
+                selected.character = -1
+            }
+
+            if (state === '') {
+                for (let i = 0; i < 5; i++) {
+                    if (pointInsideRect(pos, UI.select.buttonCharacter[i])) {
+                        selected.character = i
+                    }
+                }
+
+                if (pointInsideRect(pos, UI.select.buttonStart)) {
+                    if (selected.character > -1) {
+                        scene = 'Battle'
+                        state = 'Start'
+                    }
+                }
+            }
+        }
+    }
 }

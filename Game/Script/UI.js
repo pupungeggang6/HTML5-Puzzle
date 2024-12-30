@@ -16,5 +16,15 @@ const UI = {
     },
 
     battle: {
+        buttonMenu: [1160, 40, 80, 80],
     },
+
+    menu: {
+        rect: [320, 280, 640, 240],
+        textPause: [324, 304],
+        buttonResume: [320, 360, 640, 80],
+        textResume: [324, 384],
+        buttonExit: [320, 440, 640, 80],
+        textExit: [324, 464],
+    }
 }

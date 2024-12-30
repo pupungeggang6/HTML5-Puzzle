@@ -10,6 +10,10 @@ let scene = 'Title'
 let state = ''
 let menu = false
 
+let selected = {
+    character: -1
+}
+
 let save
 let player
 let level
