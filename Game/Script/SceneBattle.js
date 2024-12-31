@@ -1,5 +1,11 @@
 function loopBattle() {
     displayBattle()
+
+    if (menu === false) {
+        if (state === '') {
+            board.moveBlock()
+        }
+    }
 }
 
 function displayBattle() {
@@ -20,8 +26,16 @@ function mouseUpBattle(pos, button) {
             if (pointInsideRect(pos, UI.battle.buttonMenu)) {
                 menu = true
             }
-            if (state === '') {
-             
+            if (state === 'Start') {
+                state = ''
+            } else if (state === '') {
+                for (let i = 0; i < board.row; i++) {
+                    for (let j = 0; j < board.col; j++) {
+                        if (pointInsideRect(pos, [board.leftTop.x + j * UI.blockSize[0] - UI.blockSize[0] / 2, board.leftTop.y + i * UI.blockSize[1] - UI.blockSize[1] / 2, UI.blockSize[0], UI.blockSize[1]])) {
+                            board.clickHandle('Normal', i, j)
+                        }
+                    }
+                }
             }
         } else if (menu === true) {
             if (pointInsideRect(pos, UI.battle.buttonMenu)) {
