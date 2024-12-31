@@ -4,7 +4,9 @@ let img = {
         shield: new Image(),
         scroll: new Image(),
         energy: new Image(),
-    }
+    },
+
+    selectFrame: new Image(),
 }
 
 function imageLoad() {
@@ -12,4 +14,6 @@ function imageLoad() {
     img.block.shield.src = 'Image/BlockShield.png'
     img.block.scroll.src = 'Image/BlockScroll.png'
     img.block.energy.src = 'Image/BlockEnergy.png'
+
+    img.selectFrame.src = 'Image/SelectFrame.png'
 }
