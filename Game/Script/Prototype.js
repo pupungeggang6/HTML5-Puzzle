@@ -1,4 +1,5 @@
 class Level {
+    removedBlock = []
 }
 
 class Board {
@@ -75,15 +76,17 @@ class Board {
         }
     }
 
-    removeBlock(removed) {
+    removeBlock(removed, player) {
+        let r = []
         for (let i = 0; i < this.row; i++) {
             for (let j = 0; j < this.col; j++) {
                 if (removed[i][j] === 1) {
+                    r.push(this.block[i][j].type)
                     this.block[i][j] = new EmptyBlock({'Position': [this.leftTop.x + j * UI.blockSize[0], this.leftTop.y + i * UI.blockSize[1]]})
                 }
             }
         }
-
+        player.collectBlock(r)
         this.fallHandle()
     }
 
@@ -112,10 +115,10 @@ class Board {
         }
     }
 
-    clickHandle(mode, row, col) {
+    clickHandle(mode, row, col, player) {
         if (mode === 'Normal') {
             if (this.selected[row][col] === 1 && this.selectedNum >= 2) {
-                this.removeBlock(this.selected)
+                this.removeBlock(this.selected, player)
                 this.selected = this.createZero(this.row, this.col)
             } else if (this.block[row][col] instanceof Collectable) {
                 this.findConnected(row, col)
@@ -142,9 +145,6 @@ class Board {
             }
         }
     }
-}
-
-class Enemy {
 }
 
 class Block {
@@ -230,6 +230,81 @@ class Collectable extends Block {
                 this.position.x = first.x
                 this.position.y = first.y
                 this.moveQueue.shift()
+            }
+        }
+    }
+}
+
+class Player {
+    attack = 0
+    hardness = 0
+    attackNum = 0
+    shield = 0
+    life = 20
+    lifeMax = 20
+    energy = 4
+    energyMax = 8
+    hand = []
+    deck = []
+
+    attackBlockMax = 6
+    attackBlockLeft = 6
+    shieldBlockMax = 4
+    shieldBlockLeft = 4
+    energyBlockMax = 6
+    energyBlockLeft = 6
+    scrollBlockMax = 8
+    scrollBlockLeft = 8
+
+    constructor() {
+        this.attack = 10
+        this.attackNum = 0
+        this.hardness = 4
+        this.shield = 0
+        this.energy = 4
+        this.energyMax = 8
+        this.hand = []
+        this.deck = []
+
+        this.attackBlockMax = 6
+        this.attackBlockLeft = 6
+        this.shieldBlockMax = 4
+        this.shieldBlockLeft = 4
+        this.energyBlockMax = 6
+        this.energyBlockLeft = 6
+        this.scrollBlockMax = 8
+        this.scrollBlockLeft = 8
+    }
+
+    collectBlock(block) {
+        for (let i = 0; i < block.length; i++) {
+            if (block[i] === 'Attack') {
+                this.attackBlockLeft -= 1
+    
+                if (this.attackBlockLeft <= 0) {
+                    this.attackNum += 1
+                    this.attackBlockLeft += this.attackBlockMax
+                }
+            } else if (block[i] === 'Shield') {
+                this.shieldBlockLeft -= 1
+
+                if (this.shieldBlockLeft <= 0) {
+                    this.shield += this.hardness
+                    this.shieldBlockLeft = this.shieldBlockMax
+                }
+            } else if (block[i] === 'Energy') {
+                this.energyBlockLeft -= 1
+
+                if (this.energyBlockLeft <= 0) {
+                    this.energy += 1
+                    this.energyBlockLeft = this.energyBlockMax
+                }
+            } else if (block[i] === 'Scroll') {
+                this.scrollBlockLeft -= 1
+
+                if (this.scrollBlockLeft <= 0) {
+                    this.scrollBlockLeft = this.scrollBlockMax
+                }
             }
         }
     }

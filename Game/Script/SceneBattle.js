@@ -32,7 +32,7 @@ function mouseUpBattle(pos, button) {
                 for (let i = 0; i < board.row; i++) {
                     for (let j = 0; j < board.col; j++) {
                         if (pointInsideRect(pos, [board.leftTop.x + j * UI.blockSize[0] - UI.blockSize[0] / 2, board.leftTop.y + i * UI.blockSize[1] - UI.blockSize[1] / 2, UI.blockSize[0], UI.blockSize[1]])) {
-                            board.clickHandle('Normal', i, j)
+                            board.clickHandle('Normal', i, j, player)
                         }
                     }
                 }
